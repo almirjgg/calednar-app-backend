@@ -21,6 +21,7 @@ This is a backend for a calendar app, built with Node.js and Express.js. The app
 
 - Clone the repository
 - Install the dependencies with `yarn install`
+- Clone the `.env.template` and repalced for `.env`
 - Start the server with `yarn dev`
 
 ## Endpoints
@@ -35,6 +36,7 @@ This is a backend for a calendar app, built with Node.js and Express.js. The app
 
 ## Environment Variables
 
+- `PORT` - The PORT to start the server
 - `MONGO_URI` - The URI of the MongoDB database
 - `SECRET_JWT_SEED` - The secret key for the JWT token
 - `TOKEN_EXPIRATION` - The expiration time of the JWT token
