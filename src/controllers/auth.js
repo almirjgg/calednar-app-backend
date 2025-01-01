@@ -47,7 +47,7 @@ const loginUser = async (req, res) => {
 const renewToken = (req, res) => {
   const { uid, name } = req;
   const token = generateToken(uid, name);
-  res.json({ ok: true, token });
+  res.json({ ok: true, token, uid, name });
 };
 
 export { createUser, loginUser, renewToken };
