@@ -5,7 +5,7 @@ import { createUser, loginUser, renewToken } from '../../controllers/auth.js';
 
 const authRouter = Router();
 
-authRouter.get('/', validateLogin, loginUser);
+authRouter.post('/', validateLogin, loginUser);
 authRouter.post('/new', validateCreateUser, createUser);
 authRouter.get('/renew', validatorJwt, renewToken);
 
