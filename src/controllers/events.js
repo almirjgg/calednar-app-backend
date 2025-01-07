@@ -36,17 +36,25 @@ const getEventById = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.uid;
   try {
-    const { id } = req.params;
-    const userId = req.uid;
-    const event = await Event.findByIdAndUpdate(id, { ...req.body, user: userId }, { new: true });
+    const event = await Event.findById(id);
+
     if (!event) {
       return res.status(404).json({ ok: false, msg: 'event not found' });
     }
     if (event.user.toString() !== userId) {
       return res.status(401).json({ ok: false, msg: 'Unauthorized' });
     }
-    res.status(200).json({ ok: true, event });
+
+    const updatedEvent = {
+      ...req.body,
+      user: userId,
+    };
+
+    const eventUpdated = await Event.findByIdAndUpdate(id, updatedEvent, { new: true });
+    res.status(200).json({ ok: true, event: eventUpdated });
   } catch (error) {
     console.log(error);
     res.status(500).json({ ok: false, msg: 'error' });
