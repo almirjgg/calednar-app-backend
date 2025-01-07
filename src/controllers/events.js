@@ -65,13 +65,14 @@ const deleteEvent = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.uid;
-    const event = await Event.findByIdAndDelete(id);
+    const event = await Event.findById(id);
     if (!event) {
       return res.status(404).json({ ok: false, msg: 'event to delete not found' });
     }
     if (event.user.toString() !== userId) {
       return res.status(401).json({ ok: false, msg: 'Unauthorized' });
     }
+    await Event.findByIdAndDelete(eventoId);
     res.status(200).json({ ok: true, msg: 'event deleted' });
   } catch (error) {
     console.log(error);
